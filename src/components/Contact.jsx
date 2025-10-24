@@ -27,7 +27,7 @@ const Contact = () => {
             className="w-full px-3 py-2 bg-neutral-800 text-white rounded outline-none focus:ring-2 focus:ring-green-600"
           />
         </div>
-
+//comentario prueba
         <div>
           <label className="block text-purple-400 mb-1">Mensaje</label>
           <textarea
