@@ -1,39 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Sidebar from './components/Sidebar';
+import Topbar from './components/Topbar';
+import Tabs from './components/Tabs';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tabs, setTabs] = useState([]);
+  const [activeTab, setActiveTab] = useState(null);
+
+  const openTab = (name) => {
+    if (!tabs.includes(name)) {
+      setTabs([...tabs, name]);
+    }
+    setActiveTab(name);
+  };
+
+  const closeTab = (name) => {
+    const newTabs = tabs.filter(tab => tab !== name);
+    setTabs(newTabs);
+    if (activeTab === name) {
+      setActiveTab(newTabs[newTabs.length - 1] || null);
+    }
+  };
 
   return (
-    <>
-    <div className="bg-gray-800 text-white p-4">
-  Hola Flavio
-</div>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-black text-white font-mono">
+      <Topbar />
+      <div className="flex" style={{ marginTop: '2.5rem' }}>
+        <Sidebar openTab={openTab} />
+        <main className="ml-64 w-full h-[calc(100vh-2.5rem)] bg-black overflow-y-auto">
+          <Tabs
+            tabs={tabs}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            closeTab={closeTab}
+          />
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-    
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
