@@ -34,7 +34,7 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
           >
             {tab}
             <span
-              className="ml-2 text-red-500 hover:text-red-400"
+              className="ml-2 text-white-500 hover:text-white-400"
               onClick={(e) => {
                 e.stopPropagation();
                 closeTab(tab);

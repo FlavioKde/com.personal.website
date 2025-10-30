@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FiSearch } from 'react-icons/fi';
 
 const Topbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -7,8 +8,9 @@ const Topbar = () => {
   const closeDropdown = () => setShowDropdown(false);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-10 bg-neutral-900 text-white px-4 font-mono text-xs border-b border-neutral-700 z-50 flex items-center">
-      <div className="flex gap-4 items-center">
+    <div className="fixed top-0 left-0 w-full h-10 bg-neutral-900 text-white px-4 font-mono text-xs border-b border-neutral-700 z-50 flex items-center justify-between">
+      {/* Menú de navegación - se oculta en móviles */}
+      <div className="flex gap-4 items-center flex-shrink-0 md:flex hidden">
         <div className="text-neutral-300 hover:text-white cursor-pointer relative" onClick={toggleDropdown}>
           File
           {showDropdown && (
@@ -37,15 +39,21 @@ const Topbar = () => {
         <span className="text-neutral-300 hover:text-white cursor-pointer">Go</span>
       </div>
 
-      <div className="flex items-center justify-center gap-2 bg-neutral-800 px-3 py-1 rounded h-7 flex-1 mx-4">
-        <span className="text-white">🔍</span>
-        <input
-          type="text"
-          value="com.flaviokde.website"
-          readOnly
-          className="bg-transparent text-purple-400 outline-none text-xs w-full text-center"
-        />
+      {/* Buscador responsive - centrado y adaptable */}
+      <div className="flex-1 flex justify-center max-w-2xl mx-4">
+        <div className="flex items-center gap-2 bg-neutral-800 px-4 py-1 rounded h-6 border border-white/20 w-full min-w-[200px] max-w-[320px]">
+          <FiSearch className="text-white text-xs flex-shrink-0" />
+          <input
+            type="text"
+            value="com.flaviokde.website"
+            readOnly
+            className="bg-transparent text-purple-400 outline-none text-xs w-full text-center"
+          />
+        </div>
       </div>
+
+      {/* Espacio para balancear el layout */}
+      <div className="flex-shrink-0 md:flex hidden w-20"></div>
     </div>
   );
 };
