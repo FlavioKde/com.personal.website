@@ -35,6 +35,12 @@ const Sidebar = ({ openTab }) => {
             >
               &gt; Contact.js
             </li>
+            <li
+              className="text-white-400 hover:text-green-400 transition-colors duration-200 cursor-pointer"
+              onClick={() => openTab('ReadmeViewer.js')}
+            >
+              README.md
+            </li>
           </ul>
         </div>
         <div className="mt-4 pl-4 text-white-400 text-xs">

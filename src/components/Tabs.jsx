@@ -3,6 +3,7 @@ import About from './About';
 import Projects from './Projects';
 import CV from './CV';
 import Contact from './Contact';
+import ReadmeViewer from './ReadmeViewer';
 
 const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
 
@@ -16,6 +17,8 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
         return <CV/>
       case 'Contact.js':
         return <Contact/>;
+      case 'ReadmeViewer.js':
+        return <ReadmeViewer/>;  
       default:
         return <div className="text-neutral-500">Select File in project</div>;
     }
