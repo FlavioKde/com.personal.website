@@ -86,22 +86,21 @@ const Contact = () => {
         </div>
 
         <button
-          type="submit"
-          className="px-4 py-2 bg-purple-700 text-white rounded hover:bg-green-600 transition-all duration-300"
-        >
-          Enviar mensaje
+            type="submit"
+            className="px-4 py-2 bg-neutral-800 text-purple-400 font-mono rounded hover:bg-neutral-700 hover:text-purple-300 transition-all duration-300"
+          >
+            Enviar mensaje
         </button>
-      </form>
 
-      
-      <a
-        href="https://wa.me/34680952590"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transform hover:scale-105 transition-all duration-300"
-      >
-        📞 Llamar por WhatsApp
-      </a>
+            </form>
+        <a
+          href="https://wa.me/34680952590"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-4 px-4 py-2 bg-neutral-800 text-purple-400 font-mono rounded hover:bg-neutral-700 hover:text-purple-300 transition-all duration-300"
+        >
+          Llamar por WhatsApp
+        </a>
     </div>
   );
 };

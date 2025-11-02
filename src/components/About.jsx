@@ -1,7 +1,10 @@
-const About = () => {
-  return (
-    <div className="space-y-4 text-sm leading-relaxed text-neutral-300">
-      <h2 className="text-lg font-semibold text-white">Presentación</h2>
+import CodeViewer from './CodeViewer';
+
+const aboutContent = `
+<span class="text-blue-400">const</span> <span class="text-white">About</span> <span class="text-blue-400">=</span> <span class="text-blue-400">()</span> <span class="text-blue-400">=&gt;</span> <span class="text-blue-400">{</span>
+  <span class="text-green-400">return</span> (
+    <div class="space-y-4 text-sm leading-relaxed text-neutral-300">
+      <h2 class="text-lg font-semibold text-white">Presentación</h2>
       <p>
         ¡Hola! Soy Flavio, desarrollador web con enfoque técnico y visual. Me especializo en crear interfaces limpias, funcionales y adaptadas a cada contexto.
       </p>
@@ -13,6 +16,12 @@ const About = () => {
       </p>
     </div>
   );
-};
+<span class="text-blue-400">};</span>
 
-export default About;
+<span class="text-blue-400">export default</span> <span class="text-white">About;</span>
+`;
+
+
+export default function About() {
+  return <CodeViewer content={aboutContent} />;
+}
