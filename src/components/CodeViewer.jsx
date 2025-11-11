@@ -1,21 +1,29 @@
+import { vscodeStyles, cn } from '../utils/vscodeStyles';
+
 export default function CodeViewer({ content }) {
   const lines = content.split('\n');
 
   return (
-    <div className="flex bg-neutral-900 text-white font-mono text-sm rounded overflow-hidden">
-      {/* Números de línea */}
-      <div className="bg-neutral-800 text-neutral-500 text-right pr-2 pl-1 py-2 select-none">
+    <div className={cn(vscodeStyles.components.codeViewer.container)}>
+      {/* Números de línea - estilo VSCode */}
+      <div className={cn(vscodeStyles.components.codeViewer.lineNumbers)}>
         {lines.map((_, i) => (
-          <div key={i} className="h-5 leading-5">{i + 1}</div>
+          <div 
+            key={i} 
+            className="h-[22px] leading-[22px] text-[13px]"
+            style={{ fontFeatureSettings: '"tnum"' }} // Números tabulares para mejor alineación
+          >
+            {i + 1}
+          </div>
         ))}
       </div>
 
       {/* Contenido renderizado como HTML */}
-      <div className="p-2">
+      <div className={cn(vscodeStyles.components.codeViewer.content, 'flex-1')}>
         {lines.map((line, i) => (
           <div
             key={i}
-            className="h-5 leading-5 whitespace-pre"
+            className="h-[22px] leading-[22px] text-[13px] whitespace-pre font-mono"
             dangerouslySetInnerHTML={{ __html: line }}
           />
         ))}
