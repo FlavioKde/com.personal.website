@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { FaReact, FaJava, FaNodeJs, FaDatabase, FaLock, FaStar, FaCodeBranch, FaCalendar, FaUsers } from 'react-icons/fa';
 import GitHubStats from './GitHubStats';
 import RecentActivity from './RecentActivityGitHub';
+import { vscodeStyles, cn } from '../utils/vscodeStyles';
 
 // Constantes para mejor mantenibilidad
 const CATEGORIES = {
@@ -28,8 +29,8 @@ const NORMAL_REPOS = [
 ];
 
 const COLLABORATION_REPOS = [
-  'ita-challenges-frontend',
-  'ita-challenges-backend',
+  'IT-Academy-BCN/ita-challenges-frontend',
+  'IT-Academy-BCN/ita-challenges-backend',
 ];
 
 const API_URL = 'https://api.github.com/users/FlavioKde/repos?sort=updated&per_page=100';
@@ -43,17 +44,43 @@ const useGitHubRepos = () => {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
+        // Fetch de repos propios
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error('Error fetching repos');
         const data = await response.json();
 
-        const processedRepos = data
+        let processedRepos = data
           .filter(repo => !repo.fork && !repo.private)
           .map(repo => ({
             ...repo,
             category: getRepoCategory(repo),
             isFeatured: FEATURED_REPOS.includes(repo.name)
           }));
+
+        // Fetch de repositorios de colaboración directamente
+        const collaborationPromises = COLLABORATION_REPOS.map(async (collabRepo) => {
+          try {
+            const collabResponse = await fetch(`https://api.github.com/repos/${collabRepo}`);
+            if (collabResponse.ok) {
+              const collabData = await collabResponse.json();
+              return {
+                ...collabData,
+                category: getRepoCategory(collabData),
+                isCollaboration: true
+              };
+            }
+            return null;
+          } catch (err) {
+            console.warn(`No se pudo obtener el repositorio ${collabRepo}:`, err);
+            return null;
+          }
+        });
+
+        const collaborationRepos = await Promise.all(collaborationPromises);
+        const validCollaborationRepos = collaborationRepos.filter(repo => repo !== null);
+
+        // Combinar repos propios con colaboraciones
+        processedRepos = [...processedRepos, ...validCollaborationRepos];
 
         setRepos(processedRepos);
       } catch (err) {
@@ -134,82 +161,83 @@ const TechIcon = ({ repo, collaboration = false }) => {
   return <IconComponent className={color} title={title} />;
 };
 
-// Skeleton Loading
+// Skeleton Loading - estilo VSCode
 const ProjectCardSkeleton = () => (
-  <div className="bg-neutral-800 rounded-lg border border-neutral-700 p-6 animate-pulse">
-    <div className="flex justify-between mb-3">
-      <div className="h-6 bg-neutral-700 rounded w-3/4"></div>
-      <div className="h-6 w-6 bg-neutral-700 rounded-full"></div>
+  <div className={cn('rounded border p-4 animate-pulse', vscodeStyles.bg.tertiary, 'border-[#454545]')}>
+    <div className="flex justify-between mb-2">
+      <div className={cn('h-4 rounded w-3/4', vscodeStyles.bg.hover)}></div>
+      <div className={cn('h-4 w-4 rounded', vscodeStyles.bg.hover)}></div>
     </div>
-    <div className="h-4 bg-neutral-700 rounded mb-2"></div>
-    <div className="h-4 bg-neutral-700 rounded w-2/3"></div>
-    <div className="flex justify-between mb-4 mt-3">
-      <div className="h-4 bg-neutral-700 rounded w-1/4"></div>
-      <div className="h-4 bg-neutral-700 rounded w-1/4"></div>
-    </div>
-    <div className="h-10 bg-neutral-700 rounded"></div>
+    <div className={cn('h-3 rounded mb-2', vscodeStyles.bg.hover)}></div>
+    <div className={cn('h-3 rounded w-2/3 mb-3', vscodeStyles.bg.hover)}></div>
+    <div className={cn('h-3 rounded mb-3 border-b border-[#454545] pb-3', vscodeStyles.bg.hover)}></div>
+    <div className={cn('h-7 rounded', vscodeStyles.bg.hover)}></div>
   </div>
 );
 
-// Componente de Tarjeta de Proyecto
+// Componente de Tarjeta de Proyecto - estilo VSCode
 const ProjectCard = ({ repo, featured = false, collaboration = false }) => {
   const hasDemo = Boolean(repo.homepage);
   
   return (
-    <div className={`
-      bg-neutral-800 rounded-lg shadow-md border transition-all duration-300 
-      hover:scale-[1.02] hover:shadow-lg hover:border-cyan-400
-      ${featured ? 'border-yellow-400' : collaboration ? 'border-purple-400' : 'border-neutral-700'}
-    `}>
+    <div className={cn(
+      'rounded border transition-all duration-200',
+      'hover:border-opacity-80',
+      vscodeStyles.bg.tertiary,
+      featured ? 'border-yellow-400/50' : collaboration ? 'border-purple-400/50' : 'border-[#454545]'
+    )}>
       {(featured || collaboration) && (
-        <div className={`px-3 py-1 text-sm font-semibold text-center ${
-          featured ? 'bg-yellow-400 text-yellow-900' : 'bg-purple-400 text-purple-900'
-        }`}>
+        <div className={cn(
+          'px-3 py-1 text-xs font-semibold text-center border-b',
+          featured 
+            ? 'bg-yellow-400/20 text-yellow-400 border-yellow-400/30' 
+            : 'bg-purple-400/20 text-purple-400 border-purple-400/30'
+        )}>
           {featured ? '⭐ Destacado' : '🤝 Colaboración'}
         </div>
       )}
       
-      <div className="p-6">
+      <div className="p-4">
         {/* Header */}
-        <div className="flex justify-between items-start mb-3">
-          <h3 className="text-lg font-semibold text-white flex-1 mr-2 line-clamp-1" title={repo.name}>
+        <div className="flex justify-between items-start mb-2">
+          <h3 className={cn('text-sm font-semibold flex-1 mr-2 line-clamp-1', vscodeStyles.text.primary)} title={repo.name}>
             {repo.name}
           </h3>
           <TechIcon repo={repo} collaboration={collaboration} />
         </div>
 
         {/* Descripción */}
-        <p className="text-neutral-400 text-sm mb-4 line-clamp-2" title={repo.description}>
+        <p className={cn('text-xs mb-3 line-clamp-2', vscodeStyles.text.muted)} title={repo.description}>
           {repo.description || 'Sin descripción disponible'}
         </p>
 
         {/* Stats */}
-        <div className="flex justify-between items-center text-xs text-neutral-500 mb-4">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1" title="Stars">
+        <div className="flex justify-between items-center text-[10px] mb-3 pb-3 border-b border-[#454545]">
+          <div className="flex items-center gap-2">
+            <span className={cn('flex items-center gap-1', vscodeStyles.text.muted)} title="Stars">
               <FaStar className="text-yellow-400" /> {repo.stargazers_count}
             </span>
-            <span className="flex items-center gap-1" title="Forks">
+            <span className={cn('flex items-center gap-1', vscodeStyles.text.muted)} title="Forks">
               <FaCodeBranch className="text-blue-400" /> {repo.forks_count}
             </span>
           </div>
-          <span className="flex items-center gap-1" title="Última actualización">
+          <span className={cn('flex items-center gap-1', vscodeStyles.text.muted)} title="Última actualización">
             <FaCalendar className="text-green-400" />
-            {new Date(repo.updated_at).toLocaleDateString('es-ES')}
+            {new Date(repo.updated_at).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' })}
           </span>
         </div>
 
         {/* Botones */}
-        <div className={`flex gap-3 ${hasDemo ? '' : 'flex-col'}`}>
+        <div className={`flex gap-2 ${hasDemo ? '' : 'flex-col'}`}>
           <a
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`
-              flex items-center justify-center py-2 px-4 rounded transition-colors
-              bg-cyan-600 hover:bg-cyan-500 text-white font-medium
-              ${hasDemo ? 'flex-1' : 'w-full'}
-            `}
+            className={cn(
+              'flex items-center justify-center py-1.5 px-3 text-xs rounded transition-colors font-mono',
+              'bg-[#007acc] hover:bg-[#005a9e] text-white',
+              hasDemo ? 'flex-1' : 'w-full'
+            )}
           >
             Ver Código
           </a>
@@ -218,7 +246,10 @@ const ProjectCard = ({ repo, featured = false, collaboration = false }) => {
               href={repo.homepage}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 bg-green-600 hover:bg-green-500 text-white text-center py-2 px-4 rounded transition-colors font-medium"
+              className={cn(
+                'flex-1 text-center py-1.5 px-3 text-xs rounded transition-colors font-mono',
+                'bg-green-600 hover:bg-green-500 text-white'
+              )}
             >
               Live Demo
             </a>
@@ -229,7 +260,7 @@ const ProjectCard = ({ repo, featured = false, collaboration = false }) => {
   );
 };
 
-// Componente de Filtros
+// Componente de Filtros - estilo VSCode
 const FilterButtons = ({ currentFilter, onFilterChange }) => {
   const filters = [
     { key: CATEGORIES.ALL, label: 'Todos' },
@@ -239,18 +270,21 @@ const FilterButtons = ({ currentFilter, onFilterChange }) => {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 mb-8">
+    <div className="flex flex-wrap justify-center gap-2 mb-8">
       {filters.map(({ key, label }) => (
         <button
           key={key}
           onClick={() => onFilterChange(key)}
-          className={`
-            px-4 py-2 rounded-lg transition-all duration-200 font-medium
-            ${currentFilter === key
-              ? 'bg-cyan-600 text-white shadow-lg'
-              : 'bg-neutral-800 text-neutral-300 border border-neutral-600 hover:border-cyan-400 hover:text-cyan-300'
-            }
-          `}
+          className={cn(
+            'px-3 py-1.5 text-xs rounded transition-all duration-150 font-mono',
+            currentFilter === key
+              ? 'bg-[#007acc] text-white'
+              : cn(
+                  vscodeStyles.bg.tertiary,
+                  'text-neutral-300 border border-[#454545]',
+                  'hover:border-[#007acc] hover:text-[#007acc]'
+                )
+          )}
         >
           {label}
         </button>
@@ -287,7 +321,9 @@ const GitHubProjects = () => {
   // Proyectos de colaboración (hasta 3)
   const collaborationProjects = useMemo(() => {
     return repos.filter(repo => 
-      COLLABORATION_REPOS.includes(repo.name) || repo.fork
+      repo.isCollaboration || COLLABORATION_REPOS.some(collabRepo => 
+        repo.full_name === collabRepo || repo.name === collabRepo
+      )
     ).slice(0, 3);
   }, [repos]);
 
@@ -298,16 +334,16 @@ const GitHubProjects = () => {
   // Loading State con Skeletons
   if (loading) {
     return (
-      <section className="py-12 bg-neutral-900">
+      <section className={cn('py-8 font-mono', vscodeStyles.bg.content)}>
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8 text-cyan-400">Mis Proyectos</h2>
+          <h2 className={cn('text-2xl font-bold mb-6', vscodeStyles.ui.cyan)}>Mis Proyectos</h2>
           
           {/* Skeleton para destacados */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6 text-yellow-400 text-center">
+          <div className="mb-8">
+            <h3 className={cn('text-lg font-semibold mb-4', vscodeStyles.ui.yellow)}>
               🌟 Proyectos Destacados
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[...Array(3)].map((_, i) => (
                 <ProjectCardSkeleton key={i} />
               ))}
@@ -315,11 +351,11 @@ const GitHubProjects = () => {
           </div>
 
           {/* Skeleton para colaboraciones */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6 text-purple-400 text-center">
+          <div className="mb-8">
+            <h3 className={cn('text-lg font-semibold mb-4', vscodeStyles.ui.purple)}>
               🤝 Colaboraciones
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[...Array(3)].map((_, i) => (
                 <ProjectCardSkeleton key={i} />
               ))}
@@ -327,14 +363,14 @@ const GitHubProjects = () => {
           </div>
 
           {/* Skeleton para filtros */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-10 w-20 bg-neutral-800 rounded-lg animate-pulse"></div>
+              <div key={i} className={cn('h-8 w-16 rounded animate-pulse', vscodeStyles.bg.tertiary)}></div>
             ))}
           </div>
           
           {/* Skeleton para proyectos normales */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[...Array(6)].map((_, i) => (
               <ProjectCardSkeleton key={i} />
             ))}
@@ -346,35 +382,37 @@ const GitHubProjects = () => {
 
   if (error) {
     return (
-      <div className="text-center py-8 text-red-400">
+      <div className={cn('text-center py-8', vscodeStyles.ui.red)}>
         Error al cargar proyectos: {error}
       </div>
     );
   }
 
   return (
-    <section className="py-12 bg-neutral-900 text-neutral-200 font-mono">
+    <section className={cn('py-8 font-mono', vscodeStyles.bg.content)}>
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 text-cyan-400">
+        <h2 className={cn('text-2xl font-bold mb-6', vscodeStyles.ui.cyan)}>
           Mis Proyectos
         </h2>
 
         {/* Estadísticas */}
-        <div className="mb-12 bg-neutral-800 p-6 rounded-lg shadow-md border border-neutral-700">
-          <h3 className="text-xl font-semibold text-cyan-300 mb-4">
+        <div className={cn('mb-8 rounded border p-4', vscodeStyles.bg.tertiary, 'border-[#454545]')}>
+          <h3 className={cn('text-sm font-semibold mb-4', vscodeStyles.text.secondary)}>
             📊 Dashboard de GitHub
           </h3>
-          <GitHubStats />
-          <RecentActivity />
+          <div className="grid md:grid-cols-2 gap-4">
+            <GitHubStats />
+            <RecentActivity />
+          </div>
         </div>
 
         {/* Proyectos Destacados */}
         {featuredProjects.length > 0 && (
-          <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6 text-yellow-400 text-center">
+          <div className="mb-8">
+            <h3 className={cn('text-lg font-semibold mb-4', vscodeStyles.ui.yellow)}>
               🌟 Proyectos Destacados
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {featuredProjects.map(repo => (
                 <ProjectCard key={repo.id} repo={repo} featured={true} />
               ))}
@@ -384,11 +422,11 @@ const GitHubProjects = () => {
 
         {/* Colaboraciones */}
         {collaborationProjects.length > 0 && (
-          <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6 text-purple-400 text-center">
+          <div className="mb-8">
+            <h3 className={cn('text-lg font-semibold mb-4', vscodeStyles.ui.purple)}>
               🤝 Colaboraciones
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {collaborationProjects.map(repo => (
                 <ProjectCard key={repo.id} repo={repo} collaboration={true} />
               ))}
@@ -401,13 +439,13 @@ const GitHubProjects = () => {
 
         {/* Proyectos Normales */}
         {normalProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {normalProjects.map(repo => (
               <ProjectCard key={repo.id} repo={repo} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-8 text-neutral-400">
+          <div className={cn('text-center py-8', vscodeStyles.text.muted)}>
             No hay proyectos en esta categoría
           </div>
         )}
