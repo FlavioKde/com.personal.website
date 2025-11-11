@@ -7,6 +7,7 @@ import ReadmeViewer from './ReadmeViewer';
 import { FaReact } from 'react-icons/fa';
 import { RxCross2 } from 'react-icons/rx';
 import { MdInfoOutline } from 'react-icons/md';
+import { vscodeStyles, cn } from '../utils/vscodeStyles';
 
 const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
   const renderContent = () => {
@@ -22,13 +23,14 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
       case 'ReadmeViewer.js':
         return <ReadmeViewer />;
       default:
-        return <div className="text-neutral-500">Select File in project or open README.md</div>;
+        return <div className={vscodeStyles.text.muted}>Select File in project or open README.md</div>;
     }
   };
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex border-b border-neutral-700 bg-neutral-900">
+      {/* Barra de tabs - estilo VSCode */}
+      <div className={cn('flex border-b border-[#3c3c3c] bg-[#2d2d30]')}>
         {tabs.map((tab) => {
           const isActive = tab === activeTab;
           const isReadme = tab === 'ReadmeViewer.js';
@@ -36,24 +38,29 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
           return (
             <div
               key={tab}
-              className={`flex items-center gap-2 px-4 py-1 text-xs font-mono cursor-pointer border-r border-neutral-700 relative
-                ${isActive ? 'bg-neutral-800 text-white border-t-[4px] border-double border-t-blue-500' : 'text-purple-400 hover:text-green-400'}
-              `}
+              className={cn(
+                vscodeStyles.components.tab.base,
+                isActive ? vscodeStyles.components.tab.active : vscodeStyles.components.tab.inactive
+              )}
               onClick={() => setActiveTab(tab)}
             >
               {/* Ícono: Info para README, React para el resto */}
               {isReadme ? (
-                <MdInfoOutline className="text-blue-400 text-sm" />
+                <MdInfoOutline className={cn('text-xs flex-shrink-0', isActive ? 'text-blue-400' : 'text-neutral-500')} />
               ) : (
-                <FaReact className="text-cyan-400 text-sm" />
+                <FaReact className={cn('text-xs flex-shrink-0', isActive ? 'text-cyan-400' : 'text-neutral-500')} />
               )}
 
               {/* Nombre del archivo */}
-              <span className="whitespace-nowrap">{tab}</span>
+              <span className="whitespace-nowrap text-[13px]">{tab}</span>
 
-              {/* Botón de cierre */}
+              {/* Botón de cierre - solo visible en hover */}
               <RxCross2
-                className="text-sm text-white ml-2 hover:text-red-500"
+                className={cn(
+                  'text-[12px] flex-shrink-0',
+                  vscodeStyles.components.tab.closeButton,
+                  isActive ? 'text-neutral-400 hover:text-white' : 'text-neutral-500 hover:text-neutral-300'
+                )}
                 onClick={(e) => {
                   e.stopPropagation();
                   closeTab(tab);
@@ -64,7 +71,8 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
         })}
       </div>
 
-      <div className="p-4 bg-neutral-950 flex-1 overflow-y-auto">
+      {/* Área de contenido - fondo del editor VSCode */}
+      <div className={cn('p-4 flex-1 overflow-y-auto bg-[#1e1e1e]')}>
         {renderContent()}
       </div>
     </div>
