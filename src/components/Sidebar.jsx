@@ -1,83 +1,104 @@
 import { FaChevronDown } from 'react-icons/fa';
 import { FaReact } from 'react-icons/fa';
 import { MdInfoOutline } from 'react-icons/md';
+import { vscodeStyles, cn } from '../utils/vscodeStyles';
 
 const Sidebar = ({ openTab }) => {
   return (
-    <aside className="bg-black text-white w-64 fixed top-10 left-0 shadow-lg z-40 h-[calc(100vh-2.5rem)] overflow-y-auto border-r border-white/20">
-      <nav className="flex flex-col justify-between h-full p-4 font-mono text-sm">
-      <div className="flex flex-col items-start gap-1 w-full">
-  <div className="flex justify-between items-center w-full text-xs text-white-600 pl-1 mb-2">
-    <span>EXPLORER</span>
-    <span className="pr-2 text-white-600">...</span>
-  </div>
+    <aside className={cn(
+      'w-64 fixed top-10 left-0 shadow-lg z-40 h-[calc(100vh-2.5rem)] overflow-y-auto border-r border-neutral-800',
+      vscodeStyles.components.sidebar.container
+    )}>
+      <nav className="flex flex-col justify-between h-full p-2 font-mono">
+        <div className="flex flex-col items-start w-full">
+          {/* Encabezado EXPLORER - estilo VSCode */}
+          <div className={cn(
+            'flex justify-between items-center w-full mb-1',
+            vscodeStyles.components.sidebar.header
+          )}>
+            <span>EXPLORER</span>
+            <span className="pr-2 text-neutral-500 hover:text-white cursor-pointer">⋯</span>
+          </div>
 
-          <div className="flex items-center gap-1">
-            <FaChevronDown className="text-white text-sm" />
+          {/* Carpeta raíz */}
+          <div className={cn('flex items-center gap-1.5 w-full', vscodeStyles.components.sidebarItem.folder)}>
+            <FaChevronDown className={cn('text-xs', vscodeStyles.components.sidebar.chevron)} />
             <span className="text-sm">COM.FLAVIOKDE.WEBSITE</span>
           </div>
-          <ul className="flex flex-col items-start gap-1 pl-4">
-            <li className="flex items-center gap-1 text-white text-sm">
-              <FaChevronDown className="text-white text-sm" />
-              <span>public</span>
+
+          {/* Subcarpetas y archivos */}
+          <ul className="flex flex-col items-start w-full pl-6 mt-0.5 gap-0.5">
+            {/* Carpeta public */}
+            <li className={cn('flex items-center gap-1.5 w-full', vscodeStyles.components.sidebarItem.folder)}>
+              <FaChevronDown className={cn('text-xs', vscodeStyles.components.sidebar.chevron)} />
+              <span className="text-sm">public</span>
             </li>
-            <li className="flex items-center gap-1 text-white text-sm">
-              <FaChevronDown className="text-white text-sm" />
-              <span>src</span>
+
+            {/* Carpeta src */}
+            <li className={cn('flex items-center gap-1.5 w-full', vscodeStyles.components.sidebarItem.folder)}>
+              <FaChevronDown className={cn('text-xs', vscodeStyles.components.sidebar.chevron)} />
+              <span className="text-sm">src</span>
             </li>
-            <li className="flex items-center gap-1 text-white text-sm">
-              <FaChevronDown className="text-white text-sm" />
-              <span>components</span>
+
+            {/* Carpeta components */}
+            <li className={cn('flex items-center gap-1.5 w-full', vscodeStyles.components.sidebarItem.folder)}>
+              <FaChevronDown className={cn('text-xs', vscodeStyles.components.sidebar.chevron)} />
+              <span className="text-sm">components</span>
             </li>
+
+            {/* Archivos */}
             <li
-              className="flex items-center gap-1 text-white-400 hover:text-green-400 transition-colors duration-200 cursor-pointer"
+              className={cn('w-full', vscodeStyles.components.sidebarItem.base)}
               onClick={() => openTab('About.js')}
             >
-              <FaReact className="text-cyan-400 text-sm" />
+              <FaReact className={cn('text-sm', vscodeStyles.ui.cyan)} />
               <span>About.js</span>
             </li>
 
             <li
-              className="flex items-center gap-1 text-white-400 hover:text-green-400 transition-colors duration-200 cursor-pointer"
+              className={cn('w-full', vscodeStyles.components.sidebarItem.base)}
               onClick={() => openTab('Projects.js')}
             >
-              <FaReact className="text-cyan-400 text-sm" />
+              <FaReact className={cn('text-sm', vscodeStyles.ui.cyan)} />
               <span>Projects.js</span>
             </li>
+
             <li
-              className="flex items-center gap-1 text-white-400 hover:text-green-400 transition-colors duration-200 cursor-pointer"
+              className={cn('w-full', vscodeStyles.components.sidebarItem.base)}
               onClick={() => openTab('CV.js')}
             >
-              <FaReact className="text-cyan-400 text-sm" />
+              <FaReact className={cn('text-sm', vscodeStyles.ui.cyan)} />
               <span>CV.js</span>
             </li>
+
             <li
-              className="flex items-center gap-1 text-white-400 hover:text-green-400 transition-colors duration-200 cursor-pointer"
+              className={cn('w-full', vscodeStyles.components.sidebarItem.base)}
               onClick={() => openTab('Contact.js')}
             >
-              <FaReact className="text-cyan-400 text-sm" />
+              <FaReact className={cn('text-sm', vscodeStyles.ui.cyan)} />
               <span>Contact.js</span> 
             </li>
+
             <li
-              className="flex items-center gap-1 text-white-400 hover:text-green-400 transition-colors duration-200 cursor-pointer"
+              className={cn('w-full', vscodeStyles.components.sidebarItem.base)}
               onClick={() => openTab('ReadmeViewer.js')}
             >
-              <MdInfoOutline className="text-blue-400 text-sm" />
+              <MdInfoOutline className={cn('text-sm', vscodeStyles.ui.blue)} />
               <span>README.md</span>
             </li>
           </ul>
         </div>
         
-        <div className="mt-4 pl-4 text-white-400 text-xs">
-          <div className='flex border-b border-neutral-700 '>
-
-        </div>
-          <div className="text-white-600 hover:text-green-600 transition-colors duration-200 cursor-pointer flex border-b border-neutral-700 ">
+        {/* Sección inferior - OUTLINE y TIMELINE */}
+        <div className={cn('mt-auto pt-2 border-t border-neutral-800')}>
+          <div className={cn(
+            'px-3 py-1.5 text-[11px] text-neutral-500 hover:text-neutral-300 hover:bg-[#2a2d2e] rounded cursor-pointer transition-colors duration-150'
+          )}>
             &gt; OUTLINE
           </div>
-          <div className="text-white-600 hover:text-green-600 transition-colors duration-200 cursor-pointer <div className='flex border-b border-neutral-700 '>
-
-        </div>">
+          <div className={cn(
+            'px-3 py-1.5 text-[11px] text-neutral-500 hover:text-neutral-300 hover:bg-[#2a2d2e] rounded cursor-pointer transition-colors duration-150'
+          )}>
             &gt; TIMELINE
           </div>
         </div>
