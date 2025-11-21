@@ -5,15 +5,21 @@ const aboutContent = `
   <span class="text-green-400">return</span> (
     <div class="space-y-4 text-sm leading-relaxed text-neutral-300">
       <h2 class="text-lg font-semibold text-white">Presentación</h2>
+      <br/>
       <p>
-        ¡Hola! Soy Flavio, desarrollador web con enfoque técnico y visual. Me especializo en crear interfaces limpias, funcionales y adaptadas a cada contexto.
-      </p>
-      <p>
-        Este portfolio está diseñado como un editor interactivo, donde podés explorar mis proyectos, descargar mi CV y contactarme directamente.
-      </p>
-      <p>
-        Programo en inglés, pero el contenido está en castellano para facilitar la lectura y navegación en España.
-      </p>
+  ¡Hola! Soy Flavio Augusto D'Avirro, desarrollador web en crecimiento con enfoque técnico y visual. 
+   Actualmente me siento más cómodo trabajando en backend, aunque también desarrollo en frontend y 
+    busco mejorar constantemente en ambos entornos.
+</p>
+<p>
+  Este portfolio está diseñado como un editor interactivo, inspirado en entornos como VSCode.
+   Acá podés explorar mis proyectos más representativos, descargar mi CV y contactarme directamente.
+</p>
+<p>
+  Gracias por visitar. Espero que disfrutes navegando por mi trabajo, 
+   y si tenés alguna consulta o proyecto en mente, no dudes en escribirme.
+</p>
+
     </div>
   );
 <span class="text-blue-400">};</span>
