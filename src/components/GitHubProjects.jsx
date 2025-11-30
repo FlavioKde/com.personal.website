@@ -398,7 +398,7 @@ const GitHubProjects = () => {
         {/* Estadísticas */}
         <div className={cn('mb-8 rounded border p-4', vscodeStyles.bg.tertiary, 'border-[#454545]')}>
           <h3 className={cn('text-sm font-semibold mb-4', vscodeStyles.text.secondary)}>
-            📊 Dashboard de GitHub
+            🛠️ Dashboard de GitHub
           </h3>
           <div className="grid md:grid-cols-2 gap-4">
             <GitHubStats />
