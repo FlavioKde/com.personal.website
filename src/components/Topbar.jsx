@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { FiSearch } from 'react-icons/fi';
+import { FiSearch, FiMenu } from 'react-icons/fi';
 import { vscodeStyles, cn } from '../utils/vscodeStyles';
 
-const Topbar = () => {
+const Topbar = ({ toggleSidebar }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const toggleDropdown = () => setShowDropdown(prev => !prev);
@@ -28,6 +28,14 @@ const Topbar = () => {
       'fixed top-0 left-0 w-full h-10 px-0 font-mono text-xs z-50 flex items-center justify-between',
       vscodeStyles.components.topbar.container
     )}>
+      {/* Hamburger Menu - visible only on mobile */}
+      <button
+        onClick={toggleSidebar}
+        className="md:hidden px-3 h-full flex items-center text-neutral-400 hover:text-white hover:bg-[#333333]"
+      >
+        <FiMenu className="text-lg" />
+      </button>
+
       {/* Menú de navegación - se oculta en móviles */}
       <div className="flex gap-1 items-center flex-shrink-0 md:flex hidden pl-3">
         <div className={cn(vscodeStyles.components.topbarItem.base, 'relative')} onClick={toggleDropdown}>
@@ -88,7 +96,7 @@ const Topbar = () => {
           aria-label="Minimizar"
         >
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
-            <line x1="2" y1="6" x2="10" y2="6" stroke="#cccccc" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="2" y1="6" x2="10" y2="6" stroke="#cccccc" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </button>
         <button
@@ -100,7 +108,7 @@ const Topbar = () => {
           aria-label="Maximizar"
         >
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
-            <rect x="1" y="1" width="8" height="8" stroke="#cccccc" strokeWidth="1.2" fill="none"/>
+            <rect x="1" y="1" width="8" height="8" stroke="#cccccc" strokeWidth="1.2" fill="none" />
           </svg>
         </button>
         <button
@@ -112,8 +120,8 @@ const Topbar = () => {
           aria-label="Cerrar"
         >
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
-            <line x1="2" y1="2" x2="10" y2="10" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="10" y1="2" x2="2" y2="10" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="2" y1="2" x2="10" y2="10" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="10" y1="2" x2="2" y2="10" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </button>
       </div>

@@ -8,8 +8,8 @@ const aboutContent = `
       <br/>
       <p>
   ¡Hola! Soy Flavio Augusto D'Avirro, desarrollador web en crecimiento con enfoque técnico y visual. 
-   Actualmente me siento más cómodo trabajando en backend, aunque también desarrollo en frontend y 
-    busco mejorar constantemente en ambos entornos.
+   Trabajando tanto en backend como en frontend. 
+    Busco mejorar constantemente en ambos entornos.
 </p>
 <p>
   Este portfolio está diseñado como un editor interactivo, inspirado en entornos como VSCode.

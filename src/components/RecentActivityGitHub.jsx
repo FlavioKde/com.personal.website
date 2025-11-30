@@ -22,7 +22,7 @@ const RecentActivity = () => {
   }, []);
 
   const getActivityIcon = (type) => {
-    switch(type) {
+    switch (type) {
       case 'PushEvent': return '📝';
       case 'CreateEvent': return '🆕';
       case 'WatchEvent': return '⭐';
@@ -46,20 +46,20 @@ const RecentActivity = () => {
       <h3 className={cn('text-sm font-semibold mb-4', vscodeStyles.text.secondary)}>
         🔄 Actividad Reciente
       </h3>
-      
+
       <div className="space-y-2 flex-1">
         {activity.slice(0, 5).map((event, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={cn(
-              'flex items-start gap-3 p-2 rounded border border-[#454545]',
+              'flex items-start gap-2 p-1.5 rounded border border-[#454545]',
               vscodeStyles.bg.secondary,
               'hover:bg-[#37373d] transition-colors'
             )}
           >
-            <span className="text-sm">{getActivityIcon(event.type)}</span>
+            <span className="text-xs">{getActivityIcon(event.type)}</span>
             <div className="flex-1 min-w-0">
-              <p className={cn('text-xs', vscodeStyles.text.primary)}>
+              <p className={cn('text-[11px]', vscodeStyles.text.primary)}>
                 {event.type === 'PushEvent' && `Push a ${event.repo.name}`}
                 {event.type === 'CreateEvent' && `Creó ${event.repo.name}`}
                 {event.type === 'WatchEvent' && `Star a ${event.repo.name}`}
@@ -67,7 +67,7 @@ const RecentActivity = () => {
                 {event.type === 'IssuesEvent' && `Issue en ${event.repo.name}`}
                 {event.type === 'PullRequestEvent' && `Pull Request en ${event.repo.name}`}
               </p>
-              <p className={cn('text-[10px] mt-1', vscodeStyles.text.muted)}>
+              <p className={cn('text-[9px] mt-0.5', vscodeStyles.text.muted)}>
                 {new Date(event.created_at).toLocaleDateString('es-ES')}
               </p>
             </div>
