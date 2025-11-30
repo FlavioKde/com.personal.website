@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 .vs
 
+#env files
+.env
+.env.test
+.env_production
+.env_development
+
