@@ -11,14 +11,15 @@ const Contact = () => {
         message: ''
     });
     
-    // FALTABA ESTE STATE ↓
     const [messageStatus, setMessageStatus] = useState(''); // 'success', 'error', ''
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         try {
-            const response = await fetch('${API_URL}/api/send-email.php', {
+//            const response = await fetch('https://flaviodavirro.net/backend/api/send-email.php', {
+                const response = await fetch(`${API_URL}`, {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,7 +57,6 @@ const Contact = () => {
         <div className={cn('p-6 text-sm font-mono space-y-6', vscodeStyles.text.primary, vscodeStyles.bg.primary)}>
             <h2 className={cn('text-lg font-bold', vscodeStyles.ui.green)}>Contacto</h2>
 
-            {/* AGREGÁ FEEDBACK AL USUARIO */}
             {messageStatus === 'success' && (
                 <div className={cn('p-3 rounded', vscodeStyles.ui.green)}>
                     ¡Mensaje enviado correctamente!
@@ -69,7 +69,7 @@ const Contact = () => {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
-                {/* ... tus inputs igual ... */}
+                
                 <div>
                     <label className={cn('block mb-1', vscodeStyles.ui.purple)}>Nombre</label>
                     <input
