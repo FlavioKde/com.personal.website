@@ -27,6 +27,6 @@ dist-ssr
 #env files
 .env
 .env.test
-.env_production
-.env_development
+.env.production
+.env.development
 
