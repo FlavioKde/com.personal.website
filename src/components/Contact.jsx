@@ -11,13 +11,12 @@ const Contact = () => {
         message: ''
     });
     
-    const [messageStatus, setMessageStatus] = useState(''); // 'success', 'error', ''
+    const [messageStatus, setMessageStatus] = useState(''); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         try {
-//            const response = await fetch('https://flaviodavirro.net/backend/api/send-email.php', {
                 const response = await fetch(`${API_URL}`, {
 
                 method: 'POST',
