@@ -5,8 +5,11 @@
   height: 100%;
 
 }
-main {
-  margin-top: 2.5rem; /* Ajusta según la altura de tu topbar */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
 .logo {
