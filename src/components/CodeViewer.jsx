@@ -5,20 +5,20 @@ export default function CodeViewer({ content }) {
 
   return (
     <div className={cn(vscodeStyles.components.codeViewer.container)}>
-      {/* Números de línea - estilo VSCode */}
+      {/* Numbers line - style VSCode */}
       <div className={cn(vscodeStyles.components.codeViewer.lineNumbers)}>
         {lines.map((_, i) => (
           <div 
             key={i} 
             className="h-[22px] leading-[22px] text-[13px]"
-            style={{ fontFeatureSettings: '"tnum"' }} // Números tabulares para mejor alineación
+            style={{ fontFeatureSettings: '"tnum"' }} // Tab for monospaced numbers
           >
             {i + 1}
           </div>
         ))}
       </div>
 
-      {/* Contenido renderizado como HTML */}
+      {/* Content rendered as HTML */}
       <div className={cn(vscodeStyles.components.codeViewer.content, 'flex-1')}>
         {lines.map((line, i) => (
           <div
