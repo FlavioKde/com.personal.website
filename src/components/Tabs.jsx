@@ -29,7 +29,7 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
 
   return (
     <div className="flex flex-col h-full">
-      {/* Barra de tabs - estilo VSCode */}
+      {/* Tabs bar - style VSCode */}
       <div className={cn('flex border-b border-[#3c3c3c] bg-[#2d2d30]')}>
         {tabs.map((tab) => {
           const isActive = tab === activeTab;
@@ -44,17 +44,17 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
               )}
               onClick={() => setActiveTab(tab)}
             >
-              {/* Ícono: Info para README, React para el resto */}
+              {/* Icon: Info for README, React for the rest */}
               {isReadme ? (
                 <MdInfoOutline className={cn('text-xs flex-shrink-0', isActive ? 'text-blue-400' : 'text-neutral-500')} />
               ) : (
                 <FaReact className={cn('text-xs flex-shrink-0', isActive ? 'text-cyan-400' : 'text-neutral-500')} />
               )}
 
-              {/* Nombre del archivo */}
+              {/* File name */}
               <span className="whitespace-nowrap text-[13px]">{tab}</span>
 
-              {/* Botón de cierre - solo visible en hover */}
+              {/* Close button - only visible on hover */}
               <RxCross2
                 className={cn(
                   'text-[12px] flex-shrink-0',
@@ -71,8 +71,8 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
         })}
       </div>
 
-      {/* Área de contenido - fondo del editor VSCode */}
-      <div className={cn('p-4 flex-1 overflow-y-auto bg-[#1e1e1e]')}>
+      {/* Content area - VSCode editor background */}
+        <div className={cn('p-4 flex-1 overflow-y-auto bg-[#1e1e1e]')}>
         {renderContent()}
       </div>
     </div>
