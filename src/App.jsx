@@ -28,7 +28,7 @@ function App() {
     const newTabs = tabs.filter(tab => tab !== name);
     setTabs(newTabs);
     if (activeTab === name) {
-      setActiveTab(newTabs[newTabs.length - 1] || null);
+      setActiveTab(newTabs.at(-1) || null);
     }
   };
 
