@@ -4,7 +4,6 @@ import GitHubStats from './GitHubStats';
 import RecentActivity from './RecentActivityGitHub';
 import { vscodeStyles, cn } from '../utils/vscodeStyles';
 
-// Constantes para mejor mantenibilidad
 const CATEGORIES = {
   ALL: 'all',
   FRONTEND: 'frontend',
@@ -12,7 +11,7 @@ const CATEGORIES = {
   BLOCKCHAIN: 'blockchain'
 };
 
-// Listas manuales de proyectos
+// projects list manual
 const FEATURED_REPOS = [
   'com.propydis.studio',
   'com.chatbot.onbording', 
@@ -35,7 +34,7 @@ const COLLABORATION_REPOS = [
 
 const API_URL = 'https://api.github.com/users/FlavioKde/repos?sort=updated&per_page=100';
 
-// Custom Hook para fetch de repos
+// Custom Hook to fetch GitHub repos
 const useGitHubRepos = () => {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -44,7 +43,7 @@ const useGitHubRepos = () => {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        // Fetch de repos propios
+        // Fetch properties repos
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error('Error fetching repos');
         const data = await response.json();
@@ -57,7 +56,7 @@ const useGitHubRepos = () => {
             isFeatured: FEATURED_REPOS.includes(repo.name)
           }));
 
-        // Fetch de repositorios de colaboración directamente
+        // Fetch collaboration repos
         const collaborationPromises = COLLABORATION_REPOS.map(async (collabRepo) => {
           try {
             const collabResponse = await fetch(`https://api.github.com/repos/${collabRepo}`);
@@ -79,7 +78,7 @@ const useGitHubRepos = () => {
         const collaborationRepos = await Promise.all(collaborationPromises);
         const validCollaborationRepos = collaborationRepos.filter(repo => repo !== null);
 
-        // Combinar repos propios con colaboraciones
+        // Combine both sets of repos
         processedRepos = [...processedRepos, ...validCollaborationRepos];
 
         setRepos(processedRepos);
@@ -97,14 +96,12 @@ const useGitHubRepos = () => {
   return { repos, loading, error };
 };
 
-// Lógica de categorización mejorada
 const getRepoCategory = (repo) => {
   const lang = repo.language?.toLowerCase() || '';
   const name = repo.name?.toLowerCase() || '';
   const description = repo.description?.toLowerCase() || '';
   const topics = repo.topics || [];
 
-  // Priorizar topics si existen
   if (topics.some(topic => ['frontend', 'react', 'vue', 'angular'].includes(topic.toLowerCase()))) {
     return CATEGORIES.FRONTEND;
   }
@@ -115,7 +112,6 @@ const getRepoCategory = (repo) => {
     return CATEGORIES.BLOCKCHAIN;
   }
 
-  // Fallback a detección automática
   if (lang.includes('javascript') || lang.includes('typescript') || 
       description.includes('react') || description.includes('vue')) {
     return CATEGORIES.FRONTEND;
@@ -131,7 +127,6 @@ const getRepoCategory = (repo) => {
   return 'other';
 };
 
-// Componente de Icono de Tecnología
 const TechIcon = ({ repo, collaboration = false }) => {
   const lang = repo.language?.toLowerCase() || '';
   const description = repo.description?.toLowerCase() || '';
@@ -175,7 +170,7 @@ const ProjectCardSkeleton = () => (
   </div>
 );
 
-// Componente de Tarjeta de Proyecto - estilo VSCode
+// Component projects card - VSCode style
 const ProjectCard = ({ repo, featured = false, collaboration = false }) => {
   const hasDemo = Boolean(repo.homepage);
   
@@ -206,7 +201,7 @@ const ProjectCard = ({ repo, featured = false, collaboration = false }) => {
           <TechIcon repo={repo} collaboration={collaboration} />
         </div>
 
-        {/* Descripción */}
+        {/* Description */}
         <p className={cn('text-xs mb-3 line-clamp-2', vscodeStyles.text.muted)} title={repo.description}>
           {repo.description || 'Sin descripción disponible'}
         </p>
@@ -227,7 +222,7 @@ const ProjectCard = ({ repo, featured = false, collaboration = false }) => {
           </span>
         </div>
 
-        {/* Botones */}
+        {/* Buttons */}
         <div className={`flex gap-2 ${hasDemo ? '' : 'flex-col'}`}>
           <a
             href={repo.html_url}
@@ -260,7 +255,7 @@ const ProjectCard = ({ repo, featured = false, collaboration = false }) => {
   );
 };
 
-// Componente de Filtros - estilo VSCode
+// Filter buttons - VSCode style
 const FilterButtons = ({ currentFilter, onFilterChange }) => {
   const filters = [
     { key: CATEGORIES.ALL, label: 'Todos' },
@@ -293,18 +288,18 @@ const FilterButtons = ({ currentFilter, onFilterChange }) => {
   );
 };
 
-// Componente Principal
+// Component main
 const GitHubProjects = () => {
   const [filter, setFilter] = useState(CATEGORIES.ALL);
   const { repos, loading, error } = useGitHubRepos();
 
-  // Proyectos destacados (3 manuales)
+  // Featured projects (3 manual)
   const featuredProjects = useMemo(() => 
     repos.filter(repo => FEATURED_REPOS.includes(repo.name)).slice(0, 3),
     [repos]
-  );
+  )
 
-  // Proyectos normales (6 manuales, excluyendo destacados)
+  // Normal projects (6 manual, excluding featured)
   const normalProjects = useMemo(() => {
     const filtered = filter === CATEGORIES.ALL 
       ? repos 
@@ -318,7 +313,7 @@ const GitHubProjects = () => {
     return nonFeatured.slice(0, 6);
   }, [repos, filter, featuredProjects]);
 
-  // Proyectos de colaboración (hasta 3)
+  // Collaboration projects (to 3)
   const collaborationProjects = useMemo(() => {
     return repos.filter(repo => 
       repo.isCollaboration || COLLABORATION_REPOS.some(collabRepo => 
@@ -331,14 +326,14 @@ const GitHubProjects = () => {
     setFilter(newFilter);
   }, []);
 
-  // Loading State con Skeletons
+  // Loading State with Skeletons
   if (loading) {
     return (
       <section className={cn('py-8 font-mono', vscodeStyles.bg.content)}>
         <div className="container mx-auto px-4">
           <h2 className={cn('text-2xl font-bold mb-6', vscodeStyles.ui.cyan)}>Mis Proyectos</h2>
-          
-          {/* Skeleton para destacados */}
+
+          {/* Featured skeletons */}
           <div className="mb-8">
             <h3 className={cn('text-lg font-semibold mb-4', vscodeStyles.ui.yellow)}>
               🌟 Proyectos Destacados
@@ -350,7 +345,7 @@ const GitHubProjects = () => {
             </div>
           </div>
 
-          {/* Skeleton para colaboraciones */}
+          {/* Collaboration skeletons */}
           <div className="mb-8">
             <h3 className={cn('text-lg font-semibold mb-4', vscodeStyles.ui.purple)}>
               🤝 Colaboraciones
@@ -362,14 +357,14 @@ const GitHubProjects = () => {
             </div>
           </div>
 
-          {/* Skeleton para filtros */}
+          {/* Filter Skeleton */}
           <div className="flex flex-wrap justify-center gap-2 mb-8">
             {[...Array(4)].map((_, i) => (
               <div key={i} className={cn('h-8 w-16 rounded animate-pulse', vscodeStyles.bg.tertiary)}></div>
             ))}
           </div>
           
-          {/* Skeleton para proyectos normales */}
+          {/* Normal projects skeletons */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[...Array(6)].map((_, i) => (
               <ProjectCardSkeleton key={i} />
@@ -395,7 +390,7 @@ const GitHubProjects = () => {
           Mis Proyectos
         </h2>
 
-        {/* Estadísticas */}
+        {/* Stats */}
         <div className={cn('mb-8 rounded border p-4', vscodeStyles.bg.tertiary, 'border-[#454545]')}>
           <h3 className={cn('text-sm font-semibold mb-4', vscodeStyles.text.secondary)}>
             🛠️ Dashboard de GitHub
@@ -406,12 +401,13 @@ const GitHubProjects = () => {
           </div>
         </div>
 
-        {/* Proyectos Destacados */}
+        {/* Featured projects */}
         {featuredProjects.length > 0 && (
           <div className="mb-8">
             <h3 className={cn('text-lg font-semibold mb-4', vscodeStyles.ui.yellow)}>
               🌟 Proyectos Destacados
             </h3>
+            <p className='mb-6'>Desarrollos personales donde aplico arquitectura, buenas prácticas y exploración tecnológica.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {featuredProjects.map(repo => (
                 <ProjectCard key={repo.id} repo={repo} featured={true} />
@@ -420,12 +416,13 @@ const GitHubProjects = () => {
           </div>
         )}
 
-        {/* Colaboraciones */}
+        {/* itacademy */}
         {collaborationProjects.length > 0 && (
           <div className="mb-8">
             <h3 className={cn('text-lg font-semibold mb-4', vscodeStyles.ui.purple)}>
-              🤝 Colaboraciones
+              👥 Itacademy
             </h3>
+            <p className='mb-6'>Trabajo en equipo con metodología ágil, backend y frontend.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {collaborationProjects.map(repo => (
                 <ProjectCard key={repo.id} repo={repo} collaboration={true} />
@@ -434,15 +431,21 @@ const GitHubProjects = () => {
           </div>
         )}
 
-        {/* Filtros */}
+        {/* Filters */}
         <FilterButtons currentFilter={filter} onFilterChange={handleFilterChange} />
 
-        {/* Proyectos Normales */}
+        {/* Normals projects */}
         {normalProjects.length > 0 ? (
+          <div className="mb-8">
+            <h3 className={cn('text-lg font-semibold mb-4', vscodeStyles.ui.purple)}>
+              💾 Archivo de proyectos
+            </h3>
+            <p className='mb-6'>Colección de proyectos personales, donde muestro mi aprendisaje y exploración tecnológica.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {normalProjects.map(repo => (
               <ProjectCard key={repo.id} repo={repo} />
             ))}
+          </div>
           </div>
         ) : (
           <div className={cn('text-center py-8', vscodeStyles.text.muted)}>
