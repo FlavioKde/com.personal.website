@@ -65,6 +65,42 @@ const CV = () => {
           </ul>
       </section>
 
+      <section>
+          <h2 className={cn('text-sm mb-2', vscodeStyles.ui.green)}>Flujo de trabajo</h2>
+            <ul className={cn('space-y-1', vscodeStyles.text.secondary)}>
+              <li>Scrum: sprints, planificación, dailies y retrospectivas</li>
+              <li>Taiga: gestión de epics, HU y tareas técnicas</li>
+              <li>Redacción de historias de usuario centradas en valor</li>
+              <li>Validación continua: revisión, testing y control de cambios</li>
+            </ul>
+      </section>
+
+      {/* Professional Work Example */}
+      <section>
+        <h2 className={cn('text-sm mb-2', vscodeStyles.ui.green)}>Ejemplo de trabajo profesional</h2>
+          <p className={vscodeStyles.text.secondary}>
+            Formo parte de un equipo de desarrollo con metodología ágil (IT Academy) desde octubre, trabajando con sprints, daily meetings y colaboración continua. Participo en todo el flujo de trabajo: redacción de historias de usuario, descomposición en tareas, desarrollo backend y frontend (incluyendo Angular), pull requests, validaciones entre compañeros y revisión final por parte de un senior. También colaboro en la integración de nuevos compañeros y en la defensa técnica de las soluciones durante las dailies.
+          </p>
+          <p className={vscodeStyles.text.secondary}>
+            Contribuyo activamente en los repositorios de retos de programación, tanto en backend como en frontend:
+          </p>
+
+          <ul className={cn('text-xs space-y-1', vscodeStyles.text.secondary)}>
+            <li>
+              <a href="https://github.com/IT-Academy-BCN/ita-challenges-backend"
+              className={cn(vscodeStyles.ui.purple, vscodeStyles.uiHover.green)}>
+              Backend – ita-challenges-backend
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/IT-Academy-BCN/ita-challenges-frontend"
+              className={cn(vscodeStyles.ui.purple, vscodeStyles.uiHover.green)}>
+              Frontend – ita-challenges-frontend
+              </a>
+            </li>
+          </ul>
+      </section>
+
       {/* Featured Project */}
       <section>
         <h2 className={cn('text-sm mb-2', vscodeStyles.ui.green)}>Ejemplo de trabajo profesional</h2>
