@@ -38,31 +38,8 @@ const Topbar = ({ toggleSidebar }) => {
 
       {/* Menú de navegación - se oculta en móviles */}
       <div className="flex gap-1 items-center flex-shrink-0 md:flex hidden pl-3">
-        <div className={cn(vscodeStyles.components.topbarItem.base, 'relative')} onClick={toggleDropdown}>
-          File
-          {showDropdown && (
-            <div
-              className={cn(
-                'absolute top-full left-0 mt-0.5 z-10 flex flex-col min-w-[180px]',
-                vscodeStyles.components.topbar.dropdown
-              )}
-              onClick={closeDropdown}
-            >
-              <a href="#resume" className={cn('px-3 py-1.5 cursor-pointer whitespace-nowrap text-sm text-neutral-300 hover:bg-[#2a2d2e] hover:text-white transition-colors')}>
-                &gt; About.js
-              </a>
-              <a href="#projects" className={cn('px-3 py-1.5 cursor-pointer whitespace-nowrap text-sm text-neutral-300 hover:bg-[#2a2d2e] hover:text-white transition-colors')}>
-                &gt; Projects.js
-              </a>
-              <a href="#contact" className={cn('px-3 py-1.5 cursor-pointer whitespace-nowrap text-sm text-neutral-300 hover:bg-[#2a2d2e] hover:text-white transition-colors')}>
-                &gt; CV.js
-              </a>
-              <a href="#contact" className={cn('px-3 py-1.5 cursor-pointer whitespace-nowrap text-sm text-neutral-300 hover:bg-[#2a2d2e] hover:text-white transition-colors')}>
-                &gt; Contact.js
-              </a>
-            </div>
-          )}
-        </div>
+       
+        <span className={vscodeStyles.components.topbarItem.base}>File</span>
         <span className={vscodeStyles.components.topbarItem.base}>Edit</span>
         <span className={vscodeStyles.components.topbarItem.base}>Selection</span>
         <span className={vscodeStyles.components.topbarItem.base}>View</span>
