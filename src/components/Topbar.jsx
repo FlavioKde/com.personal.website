@@ -9,7 +9,7 @@ const Topbar = ({ toggleSidebar }) => {
   const closeDropdown = () => setShowDropdown(false);
 
   const handleMinimize = () => {
-    // Función para minimizar (puede ser implementada con Electron o similar)
+    // Función para minimizar 
     console.log('Minimize window');
   };
 
