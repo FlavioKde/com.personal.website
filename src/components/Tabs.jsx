@@ -23,7 +23,16 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
       case 'ReadmeViewer.js':
         return <ReadmeViewer />;
       default:
-        return <div className={vscodeStyles.text.muted}>Select File in project or open README.md</div>;
+        return (
+        <div className="flex flex-col items-center justify-center h-full text-gray-400">
+          <img
+            src="/src/assets/logo_main.png"
+            alt="FKD Logo"
+            className="w-72 h-72 mb-4"
+          />
+          <p className="text-sm">Select a file from the sidebar or refer to the README.md file to navigate....</p>
+        </div>
+        )
     }
   };
 
