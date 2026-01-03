@@ -8,6 +8,7 @@ import { FaReact } from 'react-icons/fa';
 import { RxCross2 } from 'react-icons/rx';
 import { MdInfoOutline } from 'react-icons/md';
 import { vscodeStyles, cn } from '../utils/vscodeStyles';
+import logo from '../assets/logo_main.png';
 
 const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
   const renderContent = () => {
@@ -26,8 +27,8 @@ const Tabs = ({ tabs, activeTab, setActiveTab, closeTab }) => {
         return (
         <div className="flex flex-col items-center justify-center h-full text-gray-400">
           <img
-            src="/src/assets/logo_main.png"
-            alt="FKD Logo"
+            src={logo}
+            alt="Logo"
             className="w-72 h-72 mb-4"
           />
           <p className="text-sm">Select a file from the sidebar or refer to the README.md file to navigate....</p>
