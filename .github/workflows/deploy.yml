@@ -35,4 +35,8 @@ jobs:
            local-dir: dist/
            server-dir: flaviodavirro.net/public_html/
            dangerous-clean-slate: true
-      
+           exclude: |
+                  **/.git*
+                  **/.git*/**
+                  **/backend/**    
+                  **/node_modules/**
