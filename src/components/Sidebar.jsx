@@ -21,7 +21,7 @@ const Sidebar = ({ openTab, isOpen, closeSidebar }) => {
       )}>
         <nav className="flex flex-col justify-between h-full p-2 font-mono">
           <div className="flex flex-col items-start w-full">
-            {/* Encabezado EXPLORER - estilo VSCode */}
+            {/* EXPLORER header - VSCode style */}
             <div className={cn(
               'flex justify-between items-center w-full mb-1',
               vscodeStyles.components.sidebar.header
@@ -30,33 +30,33 @@ const Sidebar = ({ openTab, isOpen, closeSidebar }) => {
               <span className="pr-2 text-neutral-500 hover:text-white cursor-pointer">⋯</span>
             </div>
 
-            {/* Carpeta raíz */}
+            {/* Root folder */}
             <div className={cn('flex items-center gap-1.5 w-full', vscodeStyles.components.sidebarItem.folder)}>
               <FaChevronDown className={cn('text-xs', vscodeStyles.components.sidebar.chevron)} />
               <span className="text-sm">COM.FLAVIOKDE.WEBSITE</span>
             </div>
 
-            {/* Subcarpetas y archivos */}
+            {/* Subfolders and files */}
             <ul className="flex flex-col items-start w-full pl-6 mt-0.5 gap-0.5">
-              {/* Carpeta public */}
+              {/* Folder public */}
               <li className={cn('flex items-center gap-1.5 w-full', vscodeStyles.components.sidebarItem.folder)}>
                 <FaChevronDown className={cn('text-xs', vscodeStyles.components.sidebar.chevron)} />
                 <span className="text-sm">public</span>
               </li>
 
-              {/* Carpeta src */}
+              {/* Folder src */}
               <li className={cn('flex items-center gap-1.5 w-full', vscodeStyles.components.sidebarItem.folder)}>
                 <FaChevronDown className={cn('text-xs', vscodeStyles.components.sidebar.chevron)} />
                 <span className="text-sm">src</span>
               </li>
 
-              {/* Carpeta components */}
+              {/* Folder components */}
               <li className={cn('flex items-center gap-1.5 w-full', vscodeStyles.components.sidebarItem.folder)}>
                 <FaChevronDown className={cn('text-xs', vscodeStyles.components.sidebar.chevron)} />
                 <span className="text-sm">components</span>
               </li>
 
-              {/* Archivos */}
+              {/* Files */}
               <li
                 className={cn('w-full', vscodeStyles.components.sidebarItem.base)}
                 onClick={() => openTab('About.js')}
@@ -99,7 +99,7 @@ const Sidebar = ({ openTab, isOpen, closeSidebar }) => {
             </ul>
           </div>
 
-          {/* Sección inferior - OUTLINE y TIMELINE */}
+          {/* Lower section - OUTLINE y TIMELINE */}
           <div className={cn('mt-auto pt-2 border-t border-neutral-800')}>
             <div className={cn(
               'px-3 py-1.5 text-[11px] text-neutral-500 hover:text-neutral-300 hover:bg-[#2a2d2e] rounded cursor-pointer transition-colors duration-150'

@@ -39,7 +39,7 @@ const GitHubStats = () => {
 
   return (
     <div className={cn('h-full flex flex-col', vscodeStyles.bg.tertiary, 'rounded border border-[#454545] p-4')}>
-      {/* Estadísticas en vertical - estilo VSCode */}
+      {/* Vertical statistics - VSCode style */}
       <h3 className={cn('text-sm font-semibold mb-4', vscodeStyles.text.secondary)}>
         📊 GitHub estadísticas</h3>
       <div className="flex flex-col gap-2 h-full">

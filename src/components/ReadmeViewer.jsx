@@ -9,7 +9,7 @@ export default function ReadmeViewer() {
       <div className="max-w-4xl mx-auto">
         <ReactMarkdown
           components={{
-            // Estilos para encabezados
+            // Styles for headings
             h1: ({ children }) => (
               <h1 className="text-2xl font-bold text-[#f0f6fc] border-b border-[#30363d] pb-2 mb-4 mt-6">
                 {children}
@@ -26,7 +26,7 @@ export default function ReadmeViewer() {
               </h3>
             ),
             
-            // Estilos para listas
+            // Styles for lists
             ul: ({ children }) => (
               <ul className="my-3 pl-6 list-disc space-y-1">
                 {children}
@@ -43,7 +43,7 @@ export default function ReadmeViewer() {
               </li>
             ),
             
-            // Estilos para código inline
+            // Styles for code blocks and inline code
             code: ({ children, className }) => {
               if (!className) {
                 return (
@@ -53,7 +53,7 @@ export default function ReadmeViewer() {
                 );
               }
               
-              // Para bloques de código
+              // Styles for fenced code blocks
               const language = className.replace('language-', '');
               return (
                 <SyntaxHighlighter
@@ -68,14 +68,14 @@ export default function ReadmeViewer() {
               );
             },
             
-            // Estilos para párrafos
+            // Styles for paragraphs
             p: ({ children }) => (
               <p className="my-3 text-[#e6edf3] leading-relaxed">
                 {children}
               </p>
             ),
             
-            // Estilos para enlaces
+            // Styles for links
             a: ({ href, children }) => (
               <a 
                 href={href} 
@@ -87,21 +87,21 @@ export default function ReadmeViewer() {
               </a>
             ),
             
-            // Estilos para bloques de cita
+            // Styles for blockquotes
             blockquote: ({ children }) => (
               <blockquote className="border-l-4 border-[#30363d] pl-4 my-4 text-[#7d8590] italic">
                 {children}
               </blockquote>
             ),
             
-            // Estilos para texto fuerte (negrita)
+            // Styles for strong (bold) text
             strong: ({ children }) => (
               <strong className="font-semibold text-[#f0f6fc]">
                 {children}
               </strong>
             ),
             
-            // Estilos para texto enfatizado (cursiva)
+            // Styles for emphasized (italic) text
             em: ({ children }) => (
               <em className="italic text-[#e6edf3]">
                 {children}

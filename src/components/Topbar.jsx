@@ -9,17 +9,17 @@ const Topbar = ({ toggleSidebar }) => {
   const closeDropdown = () => setShowDropdown(false);
 
   const handleMinimize = () => {
-    // Función para minimizar 
+    // Function to minimize
     console.log('Minimize window');
   };
 
   const handleMaximize = () => {
-    // Función para maximizar
+    // Function to maximize
     console.log('Maximize window');
   };
 
   const handleClose = () => {
-    // Función para cerrar
+    // Function to close
     console.log('Close window');
   };
 
@@ -36,7 +36,7 @@ const Topbar = ({ toggleSidebar }) => {
         <FiMenu className="text-lg" />
       </button>
 
-      {/* Menú de navegación - se oculta en móviles */}
+      {/* Nav Menu - shown only on desktop */}
       <div className="flex gap-1 items-center flex-shrink-0 md:flex hidden pl-3">
        
         <span className={vscodeStyles.components.topbarItem.base}>File</span>
@@ -46,7 +46,7 @@ const Topbar = ({ toggleSidebar }) => {
         <span className={vscodeStyles.components.topbarItem.base}>Go</span>
       </div>
 
-      {/* Buscador responsive - centrado y adaptable */}
+      {/* Responsive search engine - centered and adaptable */}
       <div className="flex-1 flex justify-center max-w-2xl mx-4">
         <div className={cn(
           'flex items-center gap-2 px-3 py-1 rounded h-6 border w-full min-w-[200px] max-w-[320px]',
@@ -62,7 +62,7 @@ const Topbar = ({ toggleSidebar }) => {
         </div>
       </div>
 
-      {/* Botones de ventana - estilo VSCode Windows con SVG inline */}
+      {/* Window buttons - VSCode Windows style with inline SVG */}
       <div className="flex-shrink-0 md:flex hidden items-center h-full">
         <button
           type="button"
