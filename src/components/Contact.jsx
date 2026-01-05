@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { vscodeStyles, cn } from '../utils/vscodeStyles';
 
-console.log('API_URL:', import.meta.env.VITE_API_URL);
-console.log('Todas las variables:', import.meta.env);
-
-
-
 const API_URL = import.meta.env.VITE_API_URL;
-console.log('API_URL después:', API_URL);
 
 const Contact = () => {
     const [formData, setFormData] = useState({
