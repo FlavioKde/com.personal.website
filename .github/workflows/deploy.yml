@@ -34,4 +34,6 @@ jobs:
            protocol: ftps
            local-dir: dist/
            server-dir: flaviodavirro.net/public_html/
+           exclude: |
+             backend/**
           
