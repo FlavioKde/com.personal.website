@@ -1,12 +1,12 @@
 # com.personal.website
-Personal Website — VSCode‑Inspired Portfolio
---
+
+## Personal Website — VSCode‑Inspired Portfolio
+
 
 This project is my personal website, designed to showcase my projects, experience, and professional style.
 
 The interface replicates the aesthetics of Visual Studio Code, with panels, tabs, and an interactive experience reminiscent of a real IDE.
 
---
 
 ## Tech stack
 
