@@ -1,4 +1,5 @@
 import { vscodeStyles, cn } from '../utils/vscodeStyles';
+import cv from '../assets/Flavio_DAvirro_IA_26.pdf';
 
 const CV = () => {
   return (
@@ -61,7 +62,7 @@ const CV = () => {
               <li><strong>Bases de datos:</strong> MySQL, MongoDB, H2</li>
               <li><strong>APIs:</strong> Swagger, Postman</li>
               <li><strong>CI/CD & Deploy:</strong> GitHub Actions, SonarCloud, Railway, SSH, FTP Deploy Action</li>
-              <li><strong>Metodologías:</strong> Scrum, Kanban, Taiga</li>
+              <li><strong>Metodologías:</strong> Scrum, Kanban</li>
           </ul>
       </section>
 
@@ -121,7 +122,8 @@ const CV = () => {
           <li>Inglés (B1)</li>
         </ul>
         <a
-          href="/Flavio_DAvirro_CV.pdf"
+          href={cv}
+          alt="Flavio D'Avirro CV PDF"
           download
           className={cn(
             'inline-block mt-6 px-4 py-2 text-xs font-semibold rounded transform hover:translate-x-1 transition-all duration-300',
