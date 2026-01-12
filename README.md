@@ -44,7 +44,7 @@ The interface replicates the aesthetics of Visual Studio Code, with panels, tabs
 
 - NPM
 
-## Facility or
+## Facility
 
 ```bash
 
