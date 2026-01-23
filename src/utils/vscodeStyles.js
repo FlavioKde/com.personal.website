@@ -101,17 +101,18 @@ export const vscodeStyles = {
     /*
     codeViewer: {
       container: 'flex bg-[#1e1e1e] text-white font-mono text-sm rounded overflow-hidden',
-     // container: 'flex bg-[#1e1e1e] text-white font-mono text-sm rounded max-w-full overflow-x-auto',
-
       lineNumbers: 'bg-[#1e1e1e] text-neutral-600 text-right pr-4 pl-4 py-4 select-none border-r border-neutral-800 min-w-[50px]',
       content: 'px-4 py-4',
     },
     */
+
+    // Code viewer - estilo VSCode
+
     codeViewer: {
-  container: 'flex bg-[#1e1e1e] text-white font-mono text-sm rounded max-w-full overflow-x-auto',
-  lineNumbers: 'bg-[#1e1e1e] text-neutral-600 text-right pr-4 pl-4 py-4 select-none border-r border-neutral-800 min-w-[50px] shrink-0',
-  content: 'px-4 py-4',
-},
+      container: 'flex bg-[#1e1e1e] text-white font-mono text-sm rounded max-w-full overflow-x-auto',
+      lineNumbers: 'bg-[#1e1e1e] text-neutral-600 text-right pr-4 pl-4 py-4 select-none border-r border-neutral-800 min-w-[50px] shrink-0',
+      content: 'px-4 py-4',
+    },
 
 
 
