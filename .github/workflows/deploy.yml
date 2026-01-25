@@ -33,7 +33,7 @@ jobs:
            port: 21
            protocol: ftps
            local-dir: dist/
-           server-dir: /public_html/
+           server-dir: /home/flavgrmn/public_html/
            exclude: |
              backend/**
           
