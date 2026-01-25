@@ -1,11 +1,11 @@
 /**
- * Utilidades de estilos para mantener consistencia con el tema VSCode
- * Este archivo centraliza las clases comunes para facilitar el mantenimiento
- * Usa los colores originales de Tailwind (black, neutral-900, neutral-800, etc.)
+ * Styles utilities to maintain consistency with VSCode theme
+ * This file centralizes common classes for easier maintenance
+ * Use original Tailwind colors (black, neutral-900, neutral-800, etc.)
  */
 
 export const vscodeStyles = {
-  // Backgrounds - usando los colores originales (black, neutral-900, neutral-800, etc.)
+  // Backgrounds - use original Tailwind colors (black, neutral-900, neutral-800, etc.)
   bg: {
     primary: 'bg-black',              // #000000 - Main background
     secondary: 'bg-neutral-900',      // #171717 - Editor background (tabs)
@@ -15,15 +15,15 @@ export const vscodeStyles = {
     content: 'bg-neutral-950',        // #0a0a0a - Content area
   },
   
-  // Text colors - manteniendo los originales
+  // Text colors - maintain original Tailwind colors
   text: {
     primary: 'text-white',            // Main text
     secondary: 'text-neutral-300',   // Secondary text
     muted: 'text-neutral-400',        // Muted text
     disabled: 'text-neutral-500',     // Disabled text
   },
-  
-  // UI colors - usando los colores exactos de Tailwind que tenías originalmente
+
+  // UI colors - using the exact Tailwind colors you had originally
   ui: {
     purple: 'text-purple-400',         // File names, links
     green: 'text-green-400',           // Hover states, success
@@ -42,7 +42,7 @@ export const vscodeStyles = {
     purple: 'hover:text-purple-400',
   },
   
-  // Borders - usando los colores originales
+  // Borders - using neutral colors
   border: {
     default: 'border-neutral-700',     // #404040
     light: 'border-white/20',
@@ -50,7 +50,7 @@ export const vscodeStyles = {
   
   // Common component styles
   components: {
-    // Tab styles - estilo VSCode
+    // Tab styles - estyles VSCode
     tab: {
       base: 'flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono cursor-pointer border-r border-[#3c3c3c] relative group',
       inactive: 'bg-[#2d2d30] text-neutral-400 hover:bg-[#37373d] hover:text-neutral-300 transition-colors duration-150',
@@ -71,7 +71,7 @@ export const vscodeStyles = {
       focus: 'focus:ring-2 focus:ring-green-600',
     },
     
-    // Sidebar item styles - estilo VSCode
+    // Sidebar item styles - estyles VSCode
     sidebarItem: {
       base: 'flex items-center gap-1.5 text-white px-2 py-0.5 rounded hover:bg-[#2a2d2e] hover:text-white transition-colors duration-150 cursor-pointer text-sm',
       folder: 'flex items-center gap-1.5 text-white px-2 py-0.5 rounded hover:bg-[#2a2d2e] transition-colors duration-150 cursor-pointer text-sm',
@@ -84,7 +84,7 @@ export const vscodeStyles = {
       chevron: 'text-neutral-500 text-xs',
     },
     
-    // Topbar menu item - estilo VSCode
+    // Topbar menu item - estyles VSCode
     topbarItem: {
       base: 'text-neutral-300 hover:text-white hover:bg-[#2a2d2e] px-2 py-1 rounded cursor-pointer transition-colors duration-150',
     },
@@ -96,17 +96,7 @@ export const vscodeStyles = {
       windowButtonClose: 'w-[46px] h-full flex items-center justify-center border-0 outline-none bg-transparent hover:bg-[#e81123] transition-colors duration-150 cursor-pointer text-white p-0 m-0',
     },
     
-    // Code viewer - estilo VSCode
-
-    /*
-    codeViewer: {
-      container: 'flex bg-[#1e1e1e] text-white font-mono text-sm rounded overflow-hidden',
-      lineNumbers: 'bg-[#1e1e1e] text-neutral-600 text-right pr-4 pl-4 py-4 select-none border-r border-neutral-800 min-w-[50px]',
-      content: 'px-4 py-4',
-    },
-    */
-
-    // Code viewer - estilo VSCode
+    // Code viewer - estyles VSCode
 
     codeViewer: {
       container: 'flex bg-[#1e1e1e] text-white font-mono text-sm rounded max-w-full overflow-x-auto',
@@ -120,11 +110,11 @@ export const vscodeStyles = {
   },
 };
 
-/**
- * Combina múltiples clases de estilo
- * @param {...string} classes - Clases a combinar
- * @returns {string} Clases combinadas
- */
-export const cn = (...classes) => {
-  return classes.filter(Boolean).join(' ');
-};
+  /**
+   * Merges multiple class names into a single string
+   * @param {...string} classes - Class names to merge
+   * @returns {string} - Classes combination
+   */
+  export const cn = (...classes) => {
+    return classes.filter(Boolean).join(' ');
+  };
