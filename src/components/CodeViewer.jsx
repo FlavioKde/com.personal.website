@@ -32,6 +32,7 @@ export default function CodeViewer({ content }) {
 
 
 
+
 //logica anterior con uso de vscodeStyles.js ver si la dejo o no
 
 //  return (
