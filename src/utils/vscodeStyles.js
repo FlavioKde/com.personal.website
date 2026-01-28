@@ -103,6 +103,13 @@ export const vscodeStyles = {
       lineNumbers: 'bg-[#1e1e1e] text-neutral-600 text-right pr-4 pl-4 py-4 select-none border-r border-neutral-800 min-w-[50px] shrink-0',
       content: 'px-4 py-4',
     },
+
+    // Code editor - estyles VSCode
+    codeEditor: {
+      container: 'bg-[#1e1e1e] text-white font-mono text-sm rounded overflow-hidden',
+      lineNumbers: 'min-h-[22px] leading-[22px] text-[13px] text-neutral-600 pr-4 pl-4 border-r border-neutral-800 shrink-0 flex items-start',
+      content: 'min-h-[22px] leading-[22px] text-[13px] whitespace-pre-wrap break-words px-4 py-0',
+    },
     
   },
 };
