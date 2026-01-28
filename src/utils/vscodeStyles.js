@@ -95,7 +95,7 @@ export const vscodeStyles = {
       windowButton: 'w-[46px] h-full flex items-center justify-center border-0 outline-none bg-transparent hover:bg-[#505050] transition-colors duration-150 cursor-pointer text-neutral-300 p-0 m-0',
       windowButtonClose: 'w-[46px] h-full flex items-center justify-center border-0 outline-none bg-transparent hover:bg-[#e81123] transition-colors duration-150 cursor-pointer text-white p-0 m-0',
     },
-    
+
     // Code viewer - estyles VSCode
 
     codeViewer: {
@@ -103,10 +103,7 @@ export const vscodeStyles = {
       lineNumbers: 'bg-[#1e1e1e] text-neutral-600 text-right pr-4 pl-4 py-4 select-none border-r border-neutral-800 min-w-[50px] shrink-0',
       content: 'px-4 py-4',
     },
-
-
-
-
+    
   },
 };
 
