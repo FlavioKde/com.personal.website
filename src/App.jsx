@@ -38,7 +38,7 @@ function App() {
       <div className="flex" style={{ marginTop: '2.5rem' }}>
         <Sidebar openTab={openTab} isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
         <main className={cn(
-          'w-full h-[calc(100vh-2.5rem)] overflow-y-auto transition-all duration-300',
+          'w-full h-[calc(100dvh-2.5rem)] overflow-y-auto transition-all duration-300',
           'md:ml-64', // Margin left only on desktop
           vscodeStyles.bg.primary
         )}>
