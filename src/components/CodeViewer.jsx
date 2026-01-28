@@ -4,22 +4,48 @@ export default function CodeViewer({ content }) {
   const lines = content.split('\n');
 
 
-  return (
-    <div className="bg-[#1e1e1e] text-white font-mono text-sm rounded overflow-hidden">
+//  return (
+//    <div className="bg-[#1e1e1e] text-white font-mono text-sm rounded overflow-hidden">
+//      {lines.map((line, i) => (
+//        <div key={i} className="flex">
+          
+//          {/* Número de línea */}
+//          <div 
+//            className="min-h-[22px] leading-[22px] text-[13px] text-neutral-600 pr-4 pl-4 border-r border-neutral-800 shrink-0 flex items-start"
+//            style={{ fontFeatureSettings: '"tnum"' }}
+//          >
+//            {i + 1}
+//          </div>
+
+//          {/* Contenido */}
+//          <div
+//            className="min-h-[22px] leading-[22px] text-[13px] whitespace-pre-wrap break-words px-4 py-0"
+//            dangerouslySetInnerHTML={{ __html: line }}
+//          />
+//        </div>
+//      ))}
+//    </div>
+//  );
+//}
+
+
+
+return (
+    <div className={cn(vscodeStyles.components.codeEditor.container)}>
       {lines.map((line, i) => (
         <div key={i} className="flex">
           
-          {/* Número de línea */}
+          {/* Numbers line - style VSCode */}
           <div 
-            className="min-h-[22px] leading-[22px] text-[13px] text-neutral-600 pr-4 pl-4 border-r border-neutral-800 shrink-0 flex items-start"
+            className={cn(vscodeStyles.components.codeEditor.lineNumbers)}
             style={{ fontFeatureSettings: '"tnum"' }}
           >
             {i + 1}
           </div>
 
-          {/* Contenido */}
+          {/* Content rendered as HTML */}
           <div
-            className="min-h-[22px] leading-[22px] text-[13px] whitespace-pre-wrap break-words px-4 py-0"
+            className={cn(vscodeStyles.components.codeEditor.content)}
             dangerouslySetInnerHTML={{ __html: line }}
           />
         </div>
