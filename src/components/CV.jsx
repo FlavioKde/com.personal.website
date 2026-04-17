@@ -1,5 +1,6 @@
 import { vscodeStyles, cn } from '../utils/vscodeStyles';
-import cv from '../assets/Flavio_DAvirro_IA_26.pdf';
+//import cv from '../assets/Flavio_DAvirro_IA_26.pdf';
+import cv from '../assets/Flavio_DAvirro_26_ITS.pdf';
 
 const CV = () => {
   return (
