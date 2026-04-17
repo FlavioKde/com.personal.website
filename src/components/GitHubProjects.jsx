@@ -15,7 +15,6 @@ const CATEGORIES = {
 const FEATURED_REPOS = [
   'com.propydis.studio',
   'com.chatbot.onbording', 
-  's05t01n01-blackjack',
   'github-streak-stats-api'
 ];
 
